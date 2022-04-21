@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+    <head th:replace="plantilla/template :: head"> </head>
+
+    <body>
+        
+        <header th:replace="plantilla/template :: header"></header>
+
+        <div class="container">
+            <div class="table-responsive">
+                <table class="table table-striped header-fixed formulario">
+                    <thead>
+                        <tr> 
+                            <th class="col-xs-12"><a th:href="@{/listarProyecto}" style='font-size: 30px; margin-left: 10px'><i class="fa-solid fa-circle-chevron-left green"></i></a></th>
+                            <th class="col-xs-12" th:text=" 'Proyecto ' + ${proyecto.NOM_PROYECTO}"></th>                        
+                        </tr>
+                    </thead>       
+
+                    <tbody >                
+                        <tr>
+                            <th class="col-2">
+                                <form id="myform" th:action="@{/guardarProyecto}" method="post" th:object="${proyecto}">
+                                    <input type="hidden" name="id_proyecto" th:field="*{ID_PROYECTO}"/>
+
+                                    <div class="form-row" style="margin-top: -30px;">
+                                        <div class="form-group col-md-4">
+                                            <label for="codigo">Codigo: </label> 
+                                            <input class="form-control" type="text" name="codigo" th:field="*{COD_PROYECTO}" readonly/>
+                                        </div>
+
+                                        <div class="form-group col-md-4">   
+                                            <label for="nombre">Nombre: </label> 
+                                            <input class="form-control" type="text" name="nombre" th:field="*{NOM_PROYECTO}" readonly/>
+                                        </div>
+
+                                        <div class="form-group col-md-4">
+                                            <label for="producto">Producto: </label> 
+                                            <select class="form-control" name="id_producto" th:field="*{ID_PRODUCTO}" readonly>
+                                                <option th:value="1" th:text="Nominas"></option>
+                                                <option th:value="2" th:text="Contabilidad"></option>
+                                                <option th:value="3" th:text="Compras"></option>
+                                            </select>
+                                        </div>  
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="en_uso">En uso: </label> 
+                                            <select class="form-control" name="en_uso" th:field="*{EN_USO}" readonly>
+                                                <option th:value="0" th:text="No"></option>
+                                                <option th:value="1" th:text="Si"></option>
+                                            </select>
+                                        </div> 
+                                        <div class="form-group col-md-4">
+                                            <label for="fechaini">Fecha Inicio: </label> 
+                                            <input class="form-control" type="date" name="fecha_ini" th:field="*{FECHA_INI}" readonly/>
+                                        </div>  
+                                        <div class="form-group col-md-4">   
+                                            <label for="fechafin">Fecha Fin: </label> 
+                                            <input class="form-control" type="date" name="fecha_fin" th:field="*{FECHA_FIN}" readonly/>
+                                        </div>  
+
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="maximohoras">Máximo horas: </label> 
+                                            <input class="form-control" type="text" name="num_max_horas" th:field="*{NUM_MAX_HORAS}" readonly/>
+                                        </div>        
+                                        <div class="form-group col-md-6">
+                                            <label for="coste">Presupuesto anual: </label> 
+                                            <input class="form-control" type="text" name="coste" th:field="*{PRESUPUESTO_ANUAL}" readonly/>
+                                        </div>  
+                                    </div>
+
+                                    </div> 
+                                </form>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+
+        <div class="container" style="margin-top: -50px;">
+            <div class="table-responsive">
+                <table class="table table-striped header-fixed ">
+                    <thead>
+                        <tr> 
+                            <th class="col-xs-12"><a th:href="@{/}" style='font-size: 30px; margin-left: 10px'></a></th>
+                            <th class="col-xs-12">Personal del Proyecto</th>
+                            <th style='width: 20%; text-align: right'>
+                                <a sec:authorize="hasRole('ADMIN')" title="Agregar personal al proyecto" th:href="@{/listarPersonalProyecto/} + ${proyecto.NOM_PROYECTO}+ '/' + ${proyecto.ID_PROYECTO}" 
+                                   style="margin-right: 10px"><i style="font-size: 25px" class="fa-solid fa-user-plus green" ></i></a>                               
+                            </th>
+
+                        </tr>
+                        <tr>
+                            <th scope="col" style="width: 14% !important">Código</th>
+                            <th scope="col" style="width: 14% !important">Nombre</th>
+                            <th scope="col" style="width: 15% !important">Apellidos</th>
+                            <th scope="col" style="width: 14% !important">Departamento</th>
+                            <th scope="col" style="width: 18% !important" >Email</th>
+                            <th scope="col" style="width: 17% !important">Dni</th>
+                            <th scope="col" style="width: 8% !important"></th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody >
+                        <tr th:each="persona : ${personal}">
+                            <td scope="col" style="width: 14% !important" th:text="${persona.COD_PERSONAL}">Mostrar Codigo personal</td>                
+                            <td scope="col" style="width: 14% !important" th:text="${persona.NOMBRE}">Mostrar Nombre</td>
+                            <td scope="col" style="width: 14% !important" th:text="${persona.APELLIDO1} + ' ' + ${persona.APELLIDO2}">Mostrar Apellido1</td>          
+                            <td th:if="${persona.ID_DEPARTAMENTO eq 1}" scope="col" style="width: 14% !important">Calidad</td>
+                            <td th:if="${persona.ID_DEPARTAMENTO eq 2}" scope="col" style="width: 14% !important">Desarrollo</td>
+                            <td th:if="${persona.ID_DEPARTAMENTO eq 3}" scope="col" style="width: 14% !important">Implantación</td>
+                            <td th:if="${persona.ID_DEPARTAMENTO eq 4}" scope="col" style="width: 14% !important">Soporte</td>
+                            <td th:if="${persona.ID_DEPARTAMENTO eq 5}" scope="col" style="width: 14% !important">Gestión</td>
+                            <td scope="col" style="width: 17% !important" th:text="${persona.EMAIL}">Mostrar Email</td>
+                            <td scope="col" style="width: 19% !important" th:text="${persona.DNI}">Mostrar Dni</td> 
+                            <td scope="col" style="width: 5% !important"> <a title="Quitar persona del proyecto" onclick="return confirm('¿Estas seguro?')" 
+                                                                             th:href="@{/eliminarProyectoPersonal/} + ${persona.ID_PERSONAL} + '/' + ${proyecto.ID_PROYECTO} "/><i sec:authorize="hasRole('ADMIN')" style="font-size: 18px" class="fa-solid fa-user-minus red"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br><br><br><br><br><br>
+
+                                <footer th:replace="plantilla/template :: footer"></footer>        
+
+
+                                </body>
+                                </html>
+
+

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+     <head th:replace="plantilla/template :: head">
+
+    <body>
+        <header th:replace="plantilla/template :: header"></header>
+        
+         <div class="container">
+            <div class="table-responsive">
+                <table class="table table-striped header-fixed ">
+                    <thead>
+                        <tr> 
+                    
+                    <th class="col-xs-12"><a title="volver" href="javascript:history.back(-1);" style='font-size: 30px; margin-left: 10px'><i class="fa-solid fa-circle-chevron-left green"></i></a></th>
+                    <th class="col-xs-12" th:text=" 'Añadir personal a proyecto:  ' + ${NOM_PROYECTO}"></th>
+                    <th style='width: 20%; text-align: right'>
+                        <a title="Nuevo usuario" th:href="@{/agregarPersonal}" style="margin-right: 10px"></a>
+                        <a title="Descargar en Pdf" th:href="@{/exportarPdf}"></a>
+                    </th>
+                    </tr>
+                    <tr>
+                        <th scope="col" style="width: 10% !important">Código</th>
+                        <th scope="col" style="width: 14% !important">Nombre</th>
+                        <th scope="col" style="width: 15% !important">Apellidos</th>
+                        <th scope="col" style="width: 14% !important">Departamento</th>
+                        <th scope="col" style="width: 18% !important" >Email</th>
+                        <th scope="col" style="width: 16% !important">Dni</th>
+                        <th scope="col" style="width: 10% !important"></th>
+                      
+                    </tr>
+                    </thead>
+
+                    <tbody >
+
+                        <tr th:each="persona : ${personal}">
+                            <td scope="col" style="width: 10% !important" th:text="${persona.COD_PERSONAL}">Mostrar Codigo personal</td>
+                            <td scope="col" style="width: 14% !important" th:text="${persona.NOMBRE}">Mostrar Nombre</td>
+                            <td scope="col" style="width: 15% !important" th:text="${persona.APELLIDO1} + ' ' + ${persona.APELLIDO2}">Mostrar Apellido1</td>
+                            <td scope="col" style="width: 14% !important" th:text="${persona.ID_DEPARTAMENTO}">Mostrar Departamento</td>
+                            <td scope="col" style="width: 18% !important" th:text="${persona.EMAIL}">Mostrar Email</td>
+                            <td scope="col" style="width: 16% !important" th:text="${persona.DNI}">Mostrar Dni</td>                 
+                            <td scope="col" style="width: 10% !important"> <a title="Añadir" sec:authorize="hasRole('ADMIN')" 
+                                                                              th:href="@{/guardarPersonalProyecto/} + ${persona.ID_PERSONAL} + '/' + ${ID_PROYECTO}"><i style="font-size: 20px" class="fa-solid fa-user-plus green"></i></a></td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <footer th:replace="plantilla/template :: footer"></footer>        
+     
+        
+    </body>
+</html>
+

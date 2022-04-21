@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+    <head th:replace="plantilla/template :: head"></head>
+    <body>
+        <header th:replace="plantilla/template :: header"></header>
+
+        <div class="container">
+            <div class="table-responsive">
+                <table class="table table-striped header-fixed ">
+                    <thead>
+                        <tr> 
+
+                            <th class="col-xs-12"><a title="volver" th:href="@{/}" style='font-size: 30px; margin-left: 10px'><i class="fa-solid fa-circle-chevron-left green"></i></a></th>
+                            <th class="col-xs-12">LISTADO DE DEPARTAMENTOS</th>
+                            <th style='width: 20%; text-align: right'>
+                                <a sec:authorize="hasRole('ADMIN')" title="Nuevo departamento" th:href="@{/agregarDepartamento}" style="margin-right: 10px"><i style="font-size: 25px" class="fa-solid fa-file-circle-plus green" ></i></a>
+
+                            </th>
+                        </tr>
+                        <tr>
+                            <th scope="col" style="width: 20% !important"></th>
+                            <th scope="col" style="width: 23% !important">Código</th>
+                            <th scope="col" style="width: 23% !important">Nombre</th>
+                            <th scope="col" style="width: 23% !important">En uso</th>
+                            <th scope="col" style="width: 5% !important"></th>                
+                            <th scope="col" style="width: 5% !important"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody >
+
+                        <tr th:each="departamento : ${departamento}">
+                            <td scope="col" style="width: 20% !important"></td>
+                            <td scope="col" style="width: 23% !important" th:text="${departamento.COD_DEPARTAMENTO}">Mostrar Codigo departamento</td>
+                            <td scope="col" style="width: 23% !important" th:text="${departamento.NOM_DEPARTAMENTO}">Mostrar Nombre</td>
+                            <td th:if="${departamento.EN_USO eq '0'}" scope="col" style="width: 22% !important"><i class="fa-solid fa-circle red"></i></td>
+                            <td th:if="${departamento.EN_USO eq '1'}" scope="col" style="width: 22% !important"><i class="fa-solid fa-circle green"></i></td>                                                               
+                            <td scope="col" style="width: 5% !important"> <a title="Editar departamento" sec:authorize="hasRole('ADMIN')" 
+                                                                             th:href="@{/editarDepartamento/} + ${departamento.ID_DEPARTAMENTO}"><i style="font-size: 18px" class="fa-solid fa-file-pen green"></i></a></td>
+
+                            <td scope="col" style="width: 5% !important"> <a title="Eliminar departamento"  onclick="return confirm('¿Estas seguro de eliminar?')" 
+                                                                             th:href="@{/eliminarDepartamento/} + ${departamento.ID_DEPARTAMENTO}"/><i sec:authorize="hasRole('ADMIN')" style="font-size: 18px" class="fa-solid fa-trash-can red"></i></a></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+        <footer th:replace="plantilla/template :: footer"></footer>
+
+    </body>
+</html>
+

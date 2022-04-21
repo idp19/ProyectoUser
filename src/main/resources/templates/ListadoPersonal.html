@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head th:replace="plantilla/template :: head">  </head>
+
+    <body>
+
+        <header th:replace="plantilla/template :: header"></header>
+
+        <div class="container">
+            <div class="table-responsive">
+                <table class="table table-striped header-fixed ">
+                    <thead>
+                        <tr> 
+                            <th class="col-xs-12"><a title="volver" th:href="@{/}" style='font-size: 30px; margin-left: 10px'><i class="fa-solid fa-circle-chevron-left green"></i></a></th>
+                            <th class="col-xs-12">LISTADO DE PERSONAL</th>
+                            <th style='width: 20%; text-align: right'>
+                                <a sec:authorize="hasRole('ADMIN')" title="Nuevo usuario" th:href="@{/agregarPersonal}" style="margin-right: 10px"><i style="font-size: 25px" class="fa-solid fa-user-plus green" ></i></a>
+                                <a title="Descargar en Pdf" th:href="@{/exportarPdf}"><i style="font-size: 28px; margin-right: 10px" class="fa-solid fa-file-pdf green"></i></a>
+                                <a title="Descargar en Pdf" th:href="@{/exportarExcel}"><i style="font-size: 28px" class="fa-solid fa-file-csv green"></i></a>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th scope="col" style="width: 10% !important">Código</th>
+                            <th scope="col" style="width: 13% !important">Nombre</th>
+                            <th scope="col" style="width: 15% !important">Apellidos</th>
+                            <th scope="col" style="width: 14% !important">Departamento</th>
+                            <th scope="col" style="width: 18% !important" >Email</th>
+                            <th scope="col" style="width: 14% !important">Dni</th>
+                            <th scope="col" style="width: 5% !important"></th>
+                            <th scope="col" style="width: 5% !important"></th>
+                            <th scope="col" style="width: 5% !important"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody >
+
+                        <tr th:each="persona : ${personal}">
+                            <td scope="col" style="width: 10% !important" th:text="${persona.COD_PERSONAL}">Mostrar Codigo personal</td>
+                            <td scope="col" style="width: 13% !important" th:text="${persona.NOMBRE}">Mostrar Nombre</td>
+                            <td scope="col" style="width: 15% !important" th:text="${persona.APELLIDO1} + ' ' + ${persona.APELLIDO2}">Mostrar Apellido1</td>                          
+                            <td th:if="${persona.ID_DEPARTAMENTO eq 1}" scope="col" style="width: 14% !important">Calidad</td>
+                            <td th:if="${persona.ID_DEPARTAMENTO eq 2}" scope="col" style="width: 14% !important">Desarrollo</td>
+                            <td th:if="${persona.ID_DEPARTAMENTO eq 3}" scope="col" style="width: 14% !important">Implantación</td>
+                            <td th:if="${persona.ID_DEPARTAMENTO eq 4}" scope="col" style="width: 14% !important">Soporte</td>
+                            <td th:if="${persona.ID_DEPARTAMENTO eq 5}" scope="col" style="width: 14% !important">Gestión</td>
+                            <td scope="col" style="width: 18% !important" th:text="${persona.EMAIL}">Mostrar Email</td>
+                            <td scope="col" style="width: 14% !important" th:text="${persona.DNI}">Mostrar Dni</td>                   
+                            <td scope="col" style="width: 5% !important"> <a title="Editar usuario" th:href="@{/editarPersonal/} + ${persona.ID_PERSONAL}"><i sec:authorize="hasRole('ADMIN')" style="font-size: 18px" class="fa-solid fa-user-pen green"></i></a></td>
+                            <td scope="col" style="width: 5% !important"> <a title="Editar login del usuario" th:href="@{/editarLogin/} + ${persona.ID_PERSONAL}" /><i sec:authorize="hasRole('ADMIN')" style="font-size: 18px" class="fa-solid fa-user-lock green"></i></a></td>
+                            <td scope="col" style="width: 5% !important"> <a title="Eliminar usuario" onclick="return confirm('¿Estas seguro de eliminar?')" th:href="@{/eliminarPersonal/} + ${persona.ID_PERSONAL}"/><i sec:authorize="hasRole('ADMIN')" style="font-size: 18px" class="fa-solid fa-trash-can red"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        
+        <footer th:replace="plantilla/template :: footer"></footer>
+        
+       
+    </body>
+</html>

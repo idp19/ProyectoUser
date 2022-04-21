@@ -1,0 +1,198 @@
+body {
+    padding: 0;
+}
+
+
+/*----botones---*/
+
+.btn-success {
+    background-color: #81be41 !important;
+    border-color: #81be41 !important;
+}
+.nav-link.btn-success:hover {
+    color: white !important;
+    background-color: #28a745 !important;
+}
+.btn-success:hover {
+    color: white !important;
+    background-color: #28a745 !important;
+}
+
+
+
+/*---------Contenido -------*/
+
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+}
+.container {
+    margin-top: 120px
+}
+
+.container_tarjetas {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    grid-gap: 40px;
+    margin-top: 150px;
+    margin-left: 20%;
+}
+
+.card-body {
+    text-align: center;
+    padding-top: 40px;
+}
+.car_icon {
+    width: 70px;
+    height: 70px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -35px;
+    left: 38%;
+    border: 1px solid rgba(0,0,0,.125);
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+}
+
+
+
+/*--------- MENU -------------*/
+
+.nav-link {
+        font-weight: 500;
+}
+.nav-link:hover {
+    color: #81be41 !important;
+}
+.nav-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.salir {
+    font-weight: 500;
+    color: #dc3545;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.salir:hover {
+    color:red !important;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0,0,0,.05);}
+
+
+
+
+/*--------- TABLAS -------------*/
+
+.header-fixed { 
+    width: 100% ;
+    border: 1px solid #f8f9fa;
+    box-sizing: border-box;
+}
+
+.header-fixed > thead,
+.header-fixed > tbody,
+.header-fixed > thead > tr,
+.header-fixed > tbody > tr,
+.header-fixed > thead > tr > th,
+.header-fixed > tbody > tr > td {
+    display: block;
+}
+
+.header-fixed > tbody > tr:after,
+.header-fixed > thead > tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+.header-fixed > tbody {
+    overflow-y: auto;
+    height: 200px;
+}
+
+.header-fixed > tbody > tr > td,
+.header-fixed > thead > tr > th {
+    width: 10%;
+    float: left;
+    overflow-x: hidden;
+}
+.header-fixed > thead > tr:first-child {
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.header-fixed > thead > tr > th:first-child {
+    width: 10%;
+}
+.header-fixed > thead > tr:first-child > th:nth-child(2) {
+    width: 70%;
+    text-align: center;
+}
+.header-fixed > thead > tr {
+    width: 98%;
+}
+
+
+
+/*---------iconos--------*/
+
+i {
+    cursor: pointer;
+}
+i.green {
+    color:#81be41 !important;
+}
+i.green:hover {
+    color:#28a745 !important;
+}
+
+i.red {
+    color:#dc3545 !important;
+}
+i.red:hover {
+    color:red !important;
+}
+
+
+
+
+/*--------Tablas - Formularios --------*/
+
+.header-fixed > thead {
+    background-color: #f8f9fa;
+}
+.header-fixed thead tr {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+.header-fixed thead th {
+    border: none !important;
+}
+
+.header-fixed.formulario > tbody {
+    height: auto !important;
+}
+.header-fixed.formulario form {
+    padding: 50px;
+}
+.header-fixed.formulario .buttons {
+    justify-content: flex-end;
+}

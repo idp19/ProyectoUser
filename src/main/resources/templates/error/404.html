@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace="plantilla/template :: head">
+    <body>
+        <header th:replace="plantilla/template :: header"></header>
+
+
+        <div class='container container_tarjetas'>
+            <div class="card-body">
+
+                <h4 class="panel-title text-danger">Error 404 - Página no encontrada</h4>
+                <br><br>
+
+                <div>
+                    <button class="btn btn-success" style="cursor: pointer" onclick="goBack()">Regresar</button>
+                </div>
+
+            </div>
+        </div>
+
+        <footer th:replace="plantilla/template :: footer"></footer>
+        <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+    </body>
+</html>

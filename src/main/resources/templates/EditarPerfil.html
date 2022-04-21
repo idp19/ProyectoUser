@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+    <head th:replace="plantilla/template :: head">
+    </head>
+    <body>        
+        <header th:replace="plantilla/template :: header"></header>
+        <div class="container">
+            <div class="table-responsive">
+                <table class="table table-striped header-fixed formulario">
+                    <thead>
+                        <tr> 
+                            <th class="col-xs-12"><a title="volver" th:href="@{/listarPerfil}" style='font-size: 30px; margin-left: 10px'><i class="fa-solid fa-circle-chevron-left green"></i></a></th>
+                            <th class="col-xs-12">EDITAR PERFIL</th>
+                        </tr>
+                    </thead>       
+
+                    <tbody >                
+                        <tr>
+                            <th class="col-2">
+                                <form id="myform" th:action="@{/guardarPerfil}" method="post" th:object="${perfil}">
+                                    <input type="hidden" name="id_perfil" th:field="*{ID_PERFIL}"/>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="codigo">Codigo: </label> 
+                                            <input class="form-control" type="text" name="codigo" th:field="*{COD_PERFIL}" required/>
+                                        </div>
+
+                                        <div class="form-group col-md-4">   
+                                            <label for="nombre">Nombre: </label> 
+                                            <input class="form-control" type="text" name="nombre" th:field="*{NOM_PERFIL}" required/>
+                                        </div>
+
+                                        <div class="form-group col-md-4">
+                                            <label for="en_uso">En uso: </label> 
+                                            <select class="form-control" name="en_uso" th:field="*{EN_USO}">
+                                                <option th:value="0" th:text="No"></option>
+                                                <option th:value="1" th:text="Si"></option>
+                                            </select>
+                                        </div>  
+                                    </div>
+
+                                    <div class="form-row">                                        
+                                        <div class="form-group col-md-4">
+                                            <label for="coste_hora">Coste Hora: </label> 
+                                            <input class="form-control" type="number" name="coste_hora" th:field="*{COSTE_HORA}"/>
+                                        </div>  
+                                        <div class="form-group col-md-4">   
+                                            <label for="permisos">Permisos: </label> 
+                                            <select class="form-control" name="permisos" th:field="*{PERMISOS}">
+                                                <option th:value="ROLE_ADMIN" th:text="Administrador"></option>
+                                                <option th:value="ROLE_USER" th:text="Usuario"></option>
+                                            </select>
+                                        </div>  
+                                    </div>
+                                    
+                                    <br>
+                                        <div class="form-row buttons"> 
+                                            <input class="form-control col-md-2 btn btn-success" style="cursor: pointer" type="submit" name="guardar" value="Guardar"/>
+                                        </div> 
+                                </form>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <footer th:replace="plantilla/template :: footer"></footer>
+    </body>
+</html>
+
+

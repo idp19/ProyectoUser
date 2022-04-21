@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+    <head th:replace="plantilla/template :: head">
+    </head>
+    <body>
+
+        <header th:replace="plantilla/template :: header"></header>
+
+        <div class="container">
+            <div class="table-responsive">
+                <table class="table table-striped header-fixed formulario">
+                    <thead>
+                        <tr> 
+                            <th class="col-xs-12"><a title="volver" th:href="@{/listarProyecto}" style='font-size: 30px; margin-left: 10px'><i class="fa-solid fa-circle-chevron-left green"></i></a></th>
+                            <th class="col-xs-12">EDITAR PROYECTO</th>
+                        </tr>
+                    </thead>       
+
+                    <tbody >                
+                        <tr>
+                            <th class="col-2">
+                                <form id="myform" th:action="@{/guardarProyecto}" method="post" th:object="${proyecto}">
+                                    <input type="hidden" name="id_proyecto" th:field="*{ID_PROYECTO}"/>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="codigo">Codigo: </label> 
+                                            <input class="form-control" type="text" name="codigo" th:field="*{COD_PROYECTO}" required/>
+                                        </div>
+
+                                        <div class="form-group col-md-4">   
+                                            <label for="nombre">Nombre: </label> 
+                                            <input class="form-control" type="text" name="nombre" th:field="*{NOM_PROYECTO}" required/>
+                                        </div>
+
+                                        <div class="form-group col-md-4">
+                                            <label for="producto">Producto: </label> 
+                                            <select class="form-control" name="id_producto" th:field="*{ID_PRODUCTO}">
+                                                <option th:value="1" th:text="Nominas"></option>
+                                                <option th:value="2" th:text="Contabilidad"></option>
+                                                <option th:value="3" th:text="Compras"></option>
+                                            </select>
+                                        </div>  
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="en_uso">En uso: </label> 
+                                            <select class="form-control" name="en_uso" th:field="*{EN_USO}">
+                                                <option th:value="0" th:text="No"></option>
+                                                <option th:value="1" th:text="Si"></option>
+                                            </select>
+                                        </div> 
+                                        <div class="form-group col-md-4">
+                                            <label for="fechaini">Fecha Inicio: </label> 
+                                            <input class="form-control" type="date" name="fecha_ini" th:field="*{FECHA_INI}"/>
+                                        </div>  
+                                        <div class="form-group col-md-4">   
+                                            <label for="fechafin">Fecha Fin: </label> 
+                                            <input class="form-control" type="date" name="fecha_fin" th:field="*{FECHA_FIN}"/>
+                                        </div>  
+
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="maximohoras">Máximo horas: </label> 
+                                            <input class="form-control" type="number" name="num_max_horas" th:field="*{NUM_MAX_HORAS}"/>
+                                        </div>        
+                                        <div class="form-group col-md-6">
+                                            <label for="coste">Presupuesto anual: </label> 
+                                            <input class="form-control" type="number" name="coste" th:field="*{PRESUPUESTO_ANUAL}"/>
+                                        </div>  
+                                    </div>
+                                   
+                                    <br>
+                                        <div class="form-row buttons"> 
+                                            <input class="form-control col-md-2 btn btn-success" style="cursor: pointer" type="submit" name="guardar" value="Guardar"/>
+                                        </div> 
+                                </form>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <footer th:replace="plantilla/template :: footer"></footer>
+
+    </body>
+</html>
+
+
+
+

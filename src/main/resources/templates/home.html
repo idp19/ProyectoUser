@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    
+      <head th:replace="plantilla/template :: head"></head>
+    
+    <body>
+        
+        <header th:replace="plantilla/template :: header"></header>
+
+        <div class='container container_tarjetas'>
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <div class="car_icon">
+                        <i class="fa-solid fa-users green" style="font-size: 30px"></i>
+                    </div>
+
+                    <h5 class="card-title">Personal</h5>
+                    <p class="card-text">Accede al listado de usuarios. Crea nuevos usuarios, edita o elimina los que ya existen.</p>
+                    <a class="nav-link btn btn-success" sec:authorize="isAuthenticated()" th:href="@{/listarPersonal}">Ir a Personal</a>
+                </div>
+            </div>
+
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <div class="car_icon">
+                        <i class="fa-solid fa-user-lock green" style="font-size: 30px"></i>
+                    </div>
+                    <h5 class="card-title">Perfiles</h5>
+                    <p class="card-text">Gestiona los perfiles de los usuarios para limitar las distintas secciones de la app.</p>
+                    <a class="nav-link btn btn-success" sec:authorize="isAuthenticated()" th:href="@{/listarPerfil}">Ir a Perfiles</a>
+                </div>
+            </div>
+
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <div class="car_icon">
+                        <i class="fa-solid fa-envelopes-bulk green" style="font-size: 30px"></i>
+                    </div>
+                    <h5 class="card-title">Departamentos</h5>
+                    <p class="card-text">Administra los distintos departamentos creando, editando o eliminado cada uno de ellos.</p>
+                    <a class="nav-link btn btn-success" sec:authorize="isAuthenticated()" th:href="@{/listarDepartamento}">Ir a Departamentos</a>
+                </div>
+            </div>
+
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <div class="car_icon">
+                        <i class="fa-solid fa-laptop-file green" style="font-size: 30px"></i>
+                    </div>
+                    <h5 class="card-title">Productos</h5>
+                    <p class="card-text">Crea, gestiona o elimina los productos para los distintos clientes de la empresa.</p>
+                    <a class="nav-link btn btn-success" sec:authorize="isAuthenticated()" th:href="@{/listarProducto}">Ir a Productos</a>
+                </div>
+            </div>
+
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <div class="car_icon">
+                        <i class="fa-solid fa-copy green" style="font-size: 30px"></i>
+                    </div>
+                    <h5 class="card-title">Proyectos</h5>
+                    <p class="card-text">Gestión integral de los proyectos de cada cliente, asignación de usuarios, ...</p>
+                    <a class="nav-link btn btn-success" sec:authorize="isAuthenticated()" th:href="@{/listarProyecto}">Ir a Proyectos</a>
+                </div>
+            </div>
+        </div>
+
+        <footer th:replace="plantilla/template :: footer"></footer>        
+        
+    </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+    <head th:replace="plantilla/template :: head"></head>
+    <body>
+         <header th:replace="plantilla/template :: header"></header> 
+         
+          <div class="container">
+            <div class="table-responsive">
+                <table class="table table-striped header-fixed ">
+                    <thead>
+                        <tr> 
+                    
+                    <th class="col-xs-12"><a title="volver" th:href="@{/}" style='font-size: 30px; margin-left: 10px'><i class="fa-solid fa-circle-chevron-left green"></i></a></th>
+                    <th class="col-xs-12">LISTADO DE PERFILES</th>
+                    <th style='width: 20%; text-align: right'>
+                        <a sec:authorize="hasRole('ADMIN')" title="Nuevo perfil" th:href="@{/agregarPerfil}" style="margin-right: 10px"><i style="font-size: 25px" class="fa-solid fa-user-plus green" ></i></a>
+                       
+                    </th>
+                    </tr>
+                    <tr>
+                        <th scope="col" style="width: 14% !important">Código</th>
+                        <th scope="col" style="width: 22% !important">Nombre</th>
+                        <th scope="col" style="width: 15% !important">En uso</th>
+                        <th scope="col" style="width: 16% !important">Coste Hora</th>
+                        <th scope="col" style="width: 20% !important" >Permisos</th>
+                        <th scope="col" style="width: 5% !important"></th>                
+                        <th scope="col" style="width: 5% !important"></th>
+                    </tr>
+                    </thead>
+
+                    <tbody >
+
+                        <tr th:each="perfil : ${perfil}">
+                            <td scope="col" style="width: 14% !important" th:text="${perfil.COD_PERFIL}">Mostrar Codigo perfil</td>
+                            <td scope="col" style="width: 22% !important" th:text="${perfil.NOM_PERFIL}">Mostrar Nombre</td>
+                            <td th:if="${perfil.EN_USO eq '0'}" scope="col" style="width: 15% !important"><i class="fa-solid fa-circle red"></i></td>
+                            <td th:if="${perfil.EN_USO eq '1'}" scope="col" style="width: 15% !important"><i class="fa-solid fa-circle green"></i></td>
+                            <td scope="col" style="width: 16% !important" th:text="${perfil.COSTE_HORA}">Mostrar Departamento</td>
+                            <td scope="col" style="width: 20% !important" th:text="${perfil.PERMISOS}">Mostrar permisos</td>                                       
+                            <td scope="col" style="width: 5% !important"> <a title="Editar perfil" sec:authorize="hasRole('ADMIN')" 
+                                                                             th:href="@{/editarPerfil/} + ${perfil.ID_PERFIL}"><i style="font-size: 18px" class="fa-solid fa-user-pen green"></i></a></td>
+                           
+                            <td scope="col" style="width: 5% !important"> <a title="Eliminar perfil" onclick="return confirm('¿Estas seguro de eliminar?')" 
+                                                                             th:href="@{/eliminarPerfil/} + ${perfil.ID_PERFIL}"/><i sec:authorize="hasRole('ADMIN')" style="font-size: 18px" class="fa-solid fa-trash-can red"></i></a></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+         <footer th:replace="plantilla/template :: footer"></footer>
+          
+         
+    </body>
+</html>
